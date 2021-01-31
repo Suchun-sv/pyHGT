@@ -1,6 +1,8 @@
 import sys
 from pyHGT.data import *
+import ipdb
 from pyHGT.model import *
+import tqdm
 from warnings import filterwarnings
 filterwarnings("ignore")
 
@@ -214,8 +216,7 @@ train_step = 1500
 pool = mp.Pool(args.n_pool)
 st = time.time()
 jobs = prepare_data(pool)
-
-for epoch in np.arange(args.n_epoch) + 1:
+for epoch in tqdm.tqdm(np.arange(args.n_epoch) + 1):
     '''
         Prepare Training and Validation Data
     '''
@@ -276,7 +277,9 @@ for epoch in np.arange(args.n_epoch) + 1:
         
         if valid_ndcg > best_val:
             best_val = valid_ndcg
-            # torch.save(model, os.path.join(args.model_dir, args.task_name + '_' + args.conv_name))
+            if best_val>0.3:
+                ipdb.set_trace()
+            torch.save(model.state_dict(), os.path.join(args.model_dir, args.task_name + '_' + args.conv_name))
             print('UPDATE!!!')
         
         st = time.time()
