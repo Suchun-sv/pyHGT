@@ -270,7 +270,7 @@ for epoch in np.arange(args.n_epoch) + 1:
         
         if valid_ndcg > best_val:
             best_val = valid_ndcg
-            torch.save(model, os.path.join(args.model_dir, args.task_name + '_' + args.conv_name))
+            # torch.save(model, os.path.join(args.model_dir, args.task_name + '_' + args.conv_name))
             print('UPDATE!!!')
         
         st = time.time()
