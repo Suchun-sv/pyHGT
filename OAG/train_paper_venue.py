@@ -1,5 +1,6 @@
 import sys
 from pyHGT.data import *
+import ipdb
 from pyHGT.model import *
 from warnings import filterwarnings
 filterwarnings("ignore")
@@ -228,6 +229,8 @@ for epoch in np.arange(args.n_epoch) + 1:
     '''
         Train (time < 2015)
     '''
+    if epoch == 6:
+        ipdb.set_trace()
     model.train()
     train_losses = []
     torch.cuda.empty_cache()
